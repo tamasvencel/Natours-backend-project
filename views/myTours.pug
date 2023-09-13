@@ -1,0 +1,44 @@
+extends base
+
+block content
+
+  main.main 
+    .card-container
+
+        each booking in bookings
+            .card
+                .card__header
+                    .card__picture
+                        .card__picture-overlay &nbsp;
+                        img.card__picture-img(src=`/img/tours/${booking.tour.imageCover}`, alt=`${booking.tour.name}`)
+                    h3.heading-tertirary
+                        span= booking.tour.name
+
+                .card__details
+                    h4.card__sub-heading= `${booking.tour.difficulty} ${booking.tour.duration}-day tour`
+                    p.card__text= booking.tour.summary
+                    .card__data
+                        svg.card__icon
+                            use(xlink:href='/img/icons.svg#icon-map-pin')
+                        span= booking.tour.startLocation.description
+                    .card__data
+                        svg.card__icon
+                            use(xlink:href='/img/icons.svg#icon-calendar')
+                        span= booking.tour.startDates[0].toLocaleString("en-us", {month: "long", year: "numeric"})
+                    .card__data
+                        svg.card__icon
+                            use(xlink:href='/img/icons.svg#icon-flag')
+                        span= `${booking.tour.locations.length} stops`
+                    .card__data
+                        svg.card__icon
+                            use(xlink:href='/img/icons.svg#icon-user')
+                        span= `${booking.tour.maxGroupSize} people`
+
+                .card__footer
+                    p
+                        span.card__footer-value= `$${booking.price} `
+                        span.card__footer-text per person
+                    p.card__ratings
+                        span.card__footer-value= booking.tour.ratingsAverage
+                        span.card__footer-text= ` rating (${booking.tour.ratingsQuantity})`
+                    a.btn.btn--green.btn--small(href=`/tour/${booking.tour.slug}`) Details
