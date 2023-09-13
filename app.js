@@ -7,6 +7,7 @@ const xss = require("xss-clean");
 const hpp = require("hpp");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const compression = require("compression");
 
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
@@ -72,6 +73,9 @@ app.use(
     ],
   })
 );
+
+// compresses all the text that is sent to the client
+app.use(compression());
 
 // TEST MIDDLEWARE
 // app.use((req, res, next) => {
