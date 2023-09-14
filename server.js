@@ -1,5 +1,3 @@
-const path = require("path");
-
 ////////////
 // SERVER //
 ////////////
@@ -11,6 +9,8 @@ process.on("uncaughtException", (err) => {
   console.log(err.name, err.message);
   process.exit(1);
 });
+
+const path = require("path");
 
 dotenv.config({ path: path.join(__dirname, "config.env") });
 const app = require("./app");
