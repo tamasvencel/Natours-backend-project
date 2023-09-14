@@ -1,3 +1,5 @@
+const path = require("path");
+
 ////////////
 // SERVER //
 ////////////
@@ -10,16 +12,13 @@ process.on("uncaughtException", (err) => {
   process.exit(1);
 });
 
-dotenv.config({ path: "./config.env" });
+dotenv.config({ path: path.join(__dirname, "config.env") });
 const app = require("./app");
 
-let DB = "";
-if (process.env.DATABASE) {
-  DB = process.env.DATABASE.replace(
-    "<PASSWORD>",
-    process.env.DATABASE_PASSWORD
-  );
-}
+const DB = process.env.DATABASE.replace(
+  "<PASSWORD>",
+  process.env.DATABASE_PASSWORD
+);
 
 mongoose.set("strictQuery", true);
 
