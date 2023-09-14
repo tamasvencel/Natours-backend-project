@@ -9,10 +9,11 @@
   "description": "natours",
   "default": "bundle.js",
   "scripts": {
+    "start": "node server.js",
     "server": "webpack serve --open",
     "watch": "webpack --mode=production --node-env=production --watch",
     "build": "webpack --mode=production --node-env=production",
-    "start": "npm-run-all --parallel build server",
+    "start:old": "npm-run-all --parallel build server",
     "start:dev": "nodemon server.js",
     "start:prod": "set NODE_ENV=production&& nodemon server.js",
     "debug": "ndb server.js",
@@ -95,5 +96,8 @@
     "stripe": "^13.5.0",
     "validator": "^13.9.0",
     "xss-clean": "^0.1.1"
+  },
+  "engines": {
+    "node": ">=10.0.0"
   }
 }
