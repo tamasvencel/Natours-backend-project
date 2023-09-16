@@ -31,6 +31,13 @@ app.set("views", path.join(__dirname, "views"));
 ////////////////////////
 // GLOBAL MIDDLEWARES //
 ////////////////////////
+// we should put this here to be in raw form and not in json
+app.post(
+  "/webhook-checkout",
+  bodyParser.raw({ type: "application/json" }),
+  bookingController.webhookCheckout
+);
+
 // Serving static files
 // app.use(express.static(`${__dirname}/public`));
 app.use(express.static(path.join(__dirname, "public")));
@@ -51,13 +58,6 @@ const limiter = rateLimit({
   message: "Too many requests from this IP, please try again in an hour!",
 });
 app.use("/api", limiter);
-
-// we should put this here to be in raw form and not in json
-app.post(
-  "/webhook-checkout",
-  bodyParser.raw({ type: "application/json" }),
-  bookingController.webhookCheckout
-);
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: "10kb" }));
