@@ -7,7 +7,6 @@ const xss = require("xss-clean");
 const hpp = require("hpp");
 const path = require("path");
 const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
 const compression = require("compression");
 const cors = require("cors");
 
