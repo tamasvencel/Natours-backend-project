@@ -1,5 +1,6 @@
 // it's a function, so we pass the secret key into it right away
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const { buffer } = require("micro");
 const Tour = require("../models/tourModel");
 const User = require("../models/userModel");
 const Booking = require("../models/bookingModel");
@@ -69,13 +70,15 @@ const createBookingCheckout = async (session) => {
   await Booking.create({ tour, user, price });
 };
 
-exports.webhookCheckout = (req, res, next) => {
+exports.webhookCheckout = async (req, res, next) => {
   const signature = req.headers["stripe-signature"];
+
+  const reqBuffer = await buffer(req);
 
   let event;
   try {
     event = stripe.webhooks.constructEvent(
-      req.body,
+      reqBuffer.body,
       signature,
       process.env.STRIPE_WEBHOOK_SECRET
     );
