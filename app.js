@@ -8,6 +8,7 @@ const hpp = require("hpp");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const compression = require("compression");
+const cors = require("cors");
 
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
@@ -83,6 +84,24 @@ app.use(compression());
 // app.use((req, res, next) => {
 //   next();
 // });
+
+// Implement CORS
+app.use(cors());
+// Access-Control-Allow-Origin *
+//
+// another example:
+// if
+// api.natours.com, front-end natours.com
+// app.use(
+//   cors({
+//     origin: "https://www.natours.com",
+//   })
+// );
+
+// another http method
+app.options("*", cors());
+// another example:
+// app.options("/api/v1/tours/:id", cors());
 
 ////////////
 // ROUTES //
