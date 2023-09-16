@@ -34,7 +34,7 @@ app.set("views", path.join(__dirname, "views"));
 // we should put this here to be in raw form and not in json
 app.post(
   "/webhook-checkout",
-  bodyParser.raw({ type: "application/json" }),
+  express.raw({ type: "application/json" }),
   bookingController.webhookCheckout
 );
 
