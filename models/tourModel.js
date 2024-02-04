@@ -140,7 +140,7 @@ tourSchema.virtual("reviews", {
 });
 
 //////////////////////
-// document middleware: runs before .save() and .ceate()
+// document middleware: runs before .save() and .create()
 tourSchema.pre("save", function (next) {
   this.slug = slugify(this.name, { lower: true });
   next();
